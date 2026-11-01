@@ -642,9 +642,9 @@ footer a{
       </div>
 
 
-      <button class="confirm-button" onclick="confirmBooking()">
-        Confirm Booking on WhatsApp →
-      </button>
+     <button type="button" class="confirm-button" id="bookingButton">
+  🚕 Send Booking Request on WhatsApp
+</button>
 
     </div>
 
@@ -995,6 +995,94 @@ Please confirm my booking and share the final fare.`;
 }
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+  const bookingButton = document.getElementById("bookingButton");
+
+  if (!bookingButton) {
+    return;
+  }
+
+  bookingButton.addEventListener("click", function () {
+
+    const from = document.getElementById("from").value.trim();
+    const to = document.getElementById("to").value.trim();
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const trip = document.getElementById("trip").value;
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const passengers = document.getElementById("passengers").value;
+
+    if (!from || !to) {
+      alert("Please enter Pickup City and Destination City.");
+      return;
+    }
+
+    if (!date) {
+      alert("Please select your Travel Date.");
+      return;
+    }
+
+    if (!time) {
+      alert("Please select your Pickup Time.");
+      return;
+    }
+
+    if (!selectedCar) {
+      alert("Please select a car: Dzire, Ertiga or Innova.");
+      return;
+    }
+
+    if (!name) {
+      alert("Please enter your Full Name.");
+      return;
+    }
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+      alert("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    if (!passengers) {
+      alert("Please select the number of passengers.");
+      return;
+    }
+
+    const bookingDetails = [
+      "NEW BOOKING REQUEST",
+      "",
+      "VAISHNO DEVI TOUR & TRAVELS",
+      "------------------------------",
+      "Pickup: " + from,
+      "Destination: " + to,
+      "Travel Date: " + date,
+      "Pickup Time: " + time,
+      "Trip Type: " + trip,
+      "Selected Car: " + selectedCar,
+      "------------------------------",
+      "CUSTOMER DETAILS",
+      "Name: " + name,
+      "Mobile: " + mobile,
+      "Passengers: " + passengers,
+      "",
+      "Please confirm my booking and share the final fare."
+    ].join("\n");
+
+    const whatsappNumber = "918320079657";
+
+    const whatsappURL =
+      "https://api.whatsapp.com/send?phone=" +
+      whatsappNumber +
+      "&text=" +
+      encodeURIComponent(bookingDetails);
+
+    window.location.href = whatsappURL;
+
+  });
+
+});
+</script>
 </body>
 </html>
