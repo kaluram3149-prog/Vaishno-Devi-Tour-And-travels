@@ -884,25 +884,59 @@ function quickSelectCar(car){
 
 
 /* CONFIRM BOOKING */
-function confirmBooking(){
+function confirmBooking() {
 
   const from = document.getElementById("from").value.trim();
   const to = document.getElementById("to").value.trim();
   const date = document.getElementById("date").value;
   const time = document.getElementById("time").value;
   const trip = document.getElementById("trip").value;
-
   const name = document.getElementById("name").value.trim();
   const mobile = document.getElementById("mobile").value.trim();
   const passengers = document.getElementById("passengers").value;
 
-
-  if(!from || !to || !date || !time){
-
+  if (!from || !to || !date || !time) {
     alert("Please fill all journey details.");
     return;
-
   }
+
+  if (!selectedCar) {
+    alert("Please select a car.");
+    return;
+  }
+
+  if (!name || !mobile || !passengers) {
+    alert("Please fill your personal details.");
+    return;
+  }
+
+  if (mobile.length < 10) {
+    alert("Please enter a valid 10 digit mobile number.");
+    return;
+  }
+
+  const message = `🚕 NEW BOOKING REQUEST
+
+Vaishno Devi Tour & Travels
+
+📍 Pickup: ${from}
+🏁 Destination: ${to}
+📅 Travel Date: ${date}
+⏰ Pickup Time: ${time}
+🔄 Trip Type: ${trip}
+🚗 Selected Car: ${selectedCar}
+
+👤 Customer Name: ${name}
+📞 Customer Mobile: ${mobile}
+👥 Passengers: ${passengers}
+
+Please confirm my booking and share the final fare.`;
+
+  const whatsappURL =
+    "https://wa.me/918320079657?text=" + encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+}
 
   if(!selectedCar){
 
