@@ -585,7 +585,69 @@ footer a:hover{
     }
 
 }
+/* SMART BOOKING FORM */
 
+.booking-step {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+.booking-step h3 {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: #111111;
+}
+
+.booking-car-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.booking-car {
+    display: block;
+    cursor: pointer;
+}
+
+.booking-car input {
+    display: none;
+}
+
+.booking-car span {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 16px;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    background: #fafafa;
+    transition: 0.2s;
+}
+
+.booking-car strong {
+    font-size: 16px;
+}
+
+.booking-car small {
+    color: #777777;
+}
+
+.booking-car:hover span {
+    border-color: #f5b400;
+}
+
+.booking-car input:checked + span {
+    border-color: #f5b400;
+    background: #fff8df;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 700px) {
+    .booking-car-options {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 </head>
 
@@ -644,44 +706,123 @@ to Ahmedabad, Jaipur, Jodhpur, Mount Abu, Delhi and more.
 
 <div class="booking-box" id="booking">
 
-<div class="booking-title">
-Where do you want to go?
-</div>
+    <div class="booking-title">
+        Book Your Cab in 3 Easy Steps
+    </div>
 
-<div class="booking-grid">
+    <!-- STEP 1: JOURNEY DETAILS -->
 
-<div class="field">
-<label>FROM</label>
-<input id="from" type="text" placeholder="Pickup city">
-</div>
+    <div class="booking-step">
+        <h3>1. Journey Details</h3>
 
-<div class="field">
-<label>TO</label>
-<input id="to" type="text" placeholder="Drop city">
-</div>
+        <div class="booking-grid">
 
-<div class="field">
-<label>TRAVEL DATE</label>
-<input id="date" type="date">
-</div>
+            <div class="field">
+                <label>FROM</label>
+                <input id="from" type="text" placeholder="Pickup city">
+            </div>
 
-<div class="field">
-<label>TRIP TYPE</label>
+            <div class="field">
+                <label>TO</label>
+                <input id="to" type="text" placeholder="Destination city">
+            </div>
 
-<select id="trip">
-<option>One Way</option>
-<option>Round Trip</option>
-</select>
+            <div class="field">
+                <label>TRAVEL DATE</label>
+                <input id="date" type="date">
+            </div>
 
-</div>
+            <div class="field">
+                <label>PICKUP TIME</label>
+                <input id="time" type="time">
+            </div>
 
-</div>
+            <div class="field">
+                <label>TRIP TYPE</label>
+                <select id="trip">
+                    <option value="">Select trip type</option>
+                    <option>One Way</option>
+                    <option>Round Trip</option>
+                </select>
+            </div>
 
-<button class="booking-submit" onclick="sendBooking()">
-Request Your Cab →
-</button>
+        </div>
+    </div>
 
-</div>
+
+    <!-- STEP 2: CAR SELECTION -->
+
+    <div class="booking-step">
+        <h3>2. Choose Your Car</h3>
+
+        <div class="booking-car-options">
+
+            <label class="booking-car">
+                <input type="radio" name="car" value="Dzire - ₹8/km">
+                <span>
+                    <strong>🚗 Dzire</strong>
+                    <small>₹8 per km</small>
+                </span>
+            </label>
+
+            <label class="booking-car">
+                <input type="radio" name="car" value="Ertiga - ₹12/km">
+                <span>
+                    <strong>🚙 Ertiga</strong>
+                    <small>₹12 per km</small>
+                </span>
+            </label>
+
+            <label class="booking-car">
+                <input type="radio" name="car" value="Innova - ₹20/km">
+                <span>
+                    <strong>🚐 Innova</strong>
+                    <small>₹20 per km</small>
+                </span>
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- STEP 3: CUSTOMER DETAILS -->
+
+    <div class="booking-step">
+        <h3>3. Your Details</h3>
+
+        <div class="booking-grid">
+
+            <div class="field">
+                <label>FULL NAME</label>
+                <input id="customerName" type="text" placeholder="Enter your name">
+            </div>
+
+            <div class="field">
+                <label>MOBILE NUMBER</label>
+                <input id="mobile" type="tel" placeholder="Enter mobile number">
+            </div>
+
+            <div class="field">
+                <label>PASSENGERS</label>
+                <select id="passengers">
+                    <option value="">Select passengers</option>
+                    <option>1 Passenger</option>
+                    <option>2 Passengers</option>
+                    <option>3 Passengers</option>
+                    <option>4 Passengers</option>
+                    <option>5 Passengers</option>
+                    <option>6 Passengers</option>
+                    <option>7 Passengers</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+
+    <button class="booking-submit" onclick="sendBooking()">
+        Confirm Booking on WhatsApp →
+    </button>
 
 </div>
 
@@ -1121,52 +1262,108 @@ function selectCar(car){
 
 /* BOOKING */
 
-function sendBooking(){
+function sendBooking() {
 
-    const from =
-        document.getElementById("from").value.trim();
+    const from = document.getElementById("from").value.trim();
+    const to = document.getElementById("to").value.trim();
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const trip = document.getElementById("trip").value;
 
-    const to =
-        document.getElementById("to").value.trim();
+    const customerName =
+        document.getElementById("customerName").value.trim();
 
-    const date =
-        document.getElementById("date").value;
+    const mobile =
+        document.getElementById("mobile").value.trim();
 
-    const trip =
-        document.getElementById("trip").value;
+    const passengers =
+        document.getElementById("passengers").value;
+
+    const selectedCar =
+        document.querySelector('input[name="car"]:checked');
 
 
-    if(!from || !to || !date){
+    /* FORM VALIDATION */
+
+    if (
+        !from ||
+        !to ||
+        !date ||
+        !time ||
+        !trip ||
+        !customerName ||
+        !mobile ||
+        !passengers ||
+        !selectedCar
+    ) {
 
         alert(
-            "Please enter Pickup, Destination and Travel Date."
+            "Please fill all booking details and select a car."
         );
 
         return;
     }
 
 
+    /* MOBILE NUMBER VALIDATION */
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+
+        alert(
+            "Please enter a valid 10-digit mobile number."
+        );
+
+        return;
+    }
+
+
+    /* CREATE BOOKING ID */
+
+    const now = new Date();
+
+    const bookingId =
+        "VDT-" +
+        now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0") +
+        "-" +
+        Math.floor(1000 + Math.random() * 9000);
+
+
+    /* CREATE WHATSAPP MESSAGE */
+
     const message =
-        "Hello Vaishno Devi Tour & Travels,%0A%0A" +
 
-        "I want to book a cab.%0A%0A" +
+        "🚕 *NEW BOOKING REQUEST* 🚕\n\n" +
 
-        "Pickup: " + encodeURIComponent(from) + "%0A" +
+        "*Booking ID:* " + bookingId + "\n\n" +
 
-        "Destination: " + encodeURIComponent(to) + "%0A" +
+        "*Customer Details*\n" +
+        "Name: " + customerName + "\n" +
+        "Mobile: " + mobile + "\n" +
+        "Passengers: " + passengers + "\n\n" +
 
-        "Travel Date: " + encodeURIComponent(date) + "%0A" +
+        "*Journey Details*\n" +
+        "Pickup: " + from + "\n" +
+        "Destination: " + to + "\n" +
+        "Date: " + date + "\n" +
+        "Pickup Time: " + time + "\n" +
+        "Trip Type: " + trip + "\n\n" +
 
-        "Trip Type: " + encodeURIComponent(trip) + "%0A%0A" +
+        "*Selected Car*\n" +
+        selectedCar.value + "\n\n" +
 
-        "Please share the available car and final fare.";
+        "Please confirm my booking and share the final fare.";
 
 
-    window.open(
-        "https://wa.me/918320079657?text=" + message,
-        "_blank"
-    );
+    /* OPEN WHATSAPP */
 
+    const whatsappURL =
+        "https://wa.me/918320079657?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(whatsappURL, "_blank");
 }
 
 </script>
