@@ -1246,19 +1246,30 @@ target="_blank">
 
 /* SELECT CAR */
 
-function selectCar(car){
+function selectCar(car) {
 
-    setTimeout(function(){
+    const carOptions =
+        document.querySelectorAll('input[name="car"]');
 
-        alert(
-            car +
-            " selected. Please enter your journey details."
-        );
+    carOptions.forEach(function(option) {
 
-    },200);
+        if (option.value.startsWith(car + " -")) {
+            option.checked = true;
+
+            const carCard =
+                option.closest(".booking-car");
+
+            if (carCard) {
+                carCard.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+        }
+
+    });
 
 }
-
 
 /* BOOKING */
 
