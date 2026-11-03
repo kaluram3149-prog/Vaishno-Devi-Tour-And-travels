@@ -648,6 +648,42 @@ footer a:hover{
         grid-template-columns: 1fr;
     }
 }
+    
+/* CAR AVAILABILITY BADGE */
+
+.car-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 12px 0 8px;
+    padding: 7px 12px;
+    background: #e9f9ef;
+    color: #16833b;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.availability-dot {
+    width: 8px;
+    height: 8px;
+    background: #20b85a;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 3px #c9f0d6;
+}
+
+.car-capacity {
+    color: #555;
+    font-size: 14px;
+    margin: 5px 0 12px;
+    font-weight: 600;
+}
+
+.car-capacity span {
+    margin-right: 5px;
+}
+
 </style>
 </head>
 
@@ -868,6 +904,15 @@ alt="Maruti Suzuki Dzire">
 Sedan • Comfortable • Economical
 </div>
 
+<div class="car-availability">
+    <span class="availability-dot"></span>
+    Available 24/7
+</div>
+
+<div class="car-capacity">
+    <span>👥</span> Up to 4 Passengers
+</div>
+
 <div class="price">
 ₹11 <small>/ km</small>
 </div>
@@ -901,6 +946,15 @@ alt="Maruti Suzuki Ertiga">
 MUV • Spacious • Family Travel
 </div>
 
+<div class="car-availability">
+    <span class="availability-dot"></span>
+    Available 24/7
+</div>
+
+<div class="car-capacity">
+    <span>👥</span> Up to 6 Passengers
+</div>
+
 <div class="price">
 ₹13 <small>/ km</small>
 </div>
@@ -932,6 +986,15 @@ alt="Toyota Innova">
 
 <div class="car-type">
 Premium • Spacious • Comfortable
+</div>
+
+<div class="car-availability">
+    <span class="availability-dot"></span>
+    Available 24/7
+</div>
+
+<div class="car-capacity">
+    <span>👥</span> Up to 7 Passengers
 </div>
 
 <div class="price">
